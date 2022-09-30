@@ -1,0 +1,24 @@
+{
+  "name": "casadesistemas",
+  "version": "1.0.0",
+  "description": "a ti como elemento central do negócio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "front-live-reload": "nodemon web/dist/index.js",
+    "back-live-reload": "nodemon server/dist/index.js",
+
+    "live-reload:docker": "docker-compose up --build live-reload"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/douglasmonteiro-dev/casadesistemas.git"
+  },
+  "author": "Douglas Monteiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/douglasmonteiro-dev/casadesistemas/issues"
+  },
+  "homepage": "https://github.com/douglasmonteiro-dev/casadesistemas#readme"
+}

@@ -1,0 +1,46 @@
+{
+  "site": {
+    "description": "uma pagina institucional para sua empresa, produto ou serviço",
+    "price": "500"
+  },
+  "bot": {
+    "description": "um atendente virtual que utiliza inteligência artificial para responder as questões conforme você predefiniu e integra o Whatsapp com o sistema da sua empresa",
+    "price": "3000"
+  },
+  "app": {
+    "description": "aplicativos para Android e IOS e disponibilizamos nas lojas oficiais",
+    "price": "4000"
+  },
+  "system": {
+    "description": "o sistema da sua empresa ou produto sob demanda, de acordo com as suas necessidades",
+    "price": "1500"
+  },
+  "design": {
+    "description": "toda a parte visual e cuidamos do marketing digital da sua empresa",
+    "price": "500"
+  },
+  "course": {
+    "description": "aulas na prática qualquer uma de nossas áreas de especialidades",
+    "price": "400"
+  },
+  "repair": {
+    "description": "conserto do seu equipamento com experiência e responsabilidade garantindo a qualidade do serviço",
+    "price": "150"
+  },
+  "notebook": {
+    "description": "compra e venda de notebooks",
+    "price": "2500"
+  },
+  "smartphone": {
+    "description": "compra e venda de smartphones",
+    "price": "800"
+  },
+  "security": {
+    "description": "venda e instalação de sistemas completos de circuito fechado de cameras, com visualização através da internet ou app",
+    "price": "3000"
+  },
+  "solar": {
+    "description": "projetar, vender e instalar usinas de energia solar e eólicas ongrid e offgrid",
+    "price": "15000"
+  }
+}

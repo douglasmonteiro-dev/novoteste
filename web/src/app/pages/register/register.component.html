@@ -1,0 +1,51 @@
+
+<app-menu>
+    <div class="main background">   
+      <div class="jumbotron container banner mt-5">
+        <h1 class="text-center">Seja Bem-vindo!</h1>
+    
+      <form [formGroup]="formRegister" (submit)="register()">
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="Nome" formControlName="name">
+          <mat-error *ngIf="formRegister.controls.name.status === 'INVALID'">
+              Nome é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00">
+          <mat-error *ngIf="formRegister.controls.cpf.status === 'INVALID'">
+              CPF é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="Celular" formControlName="phone" mask="(00)00000-0000">
+          <mat-error *ngIf="formRegister.controls.phone.status === 'INVALID'">
+              Celular é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="E-mail" formControlName="email">
+          <mat-error *ngIf="formRegister.controls.email.status === 'INVALID'">
+              E-mail é <strong>obrigatório</strong>
+          </mat-error>
+          <mat-error *ngIf="formRegister.controls.email.invalid && formRegister.controls.email.status === 'VALID'">
+            Por favor digite um e-mail válido
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="Senha (6 números)" formControlName="password" type="password" mask="000000">
+
+          <mat-error *ngIf="formRegister.controls.password.status === 'INVALID'">
+            Digite uma <strong>Senha</strong> numérica de pelo menos <strong>4 dígitos</strong>
+          </mat-error>
+        </mat-form-field>
+
+      
+      
+      <button mat-raised-button	class="btn btn-block">Cadastrar</button>
+      
+      </form>
+      </div>
+
+    </div>
+  </app-menu>  

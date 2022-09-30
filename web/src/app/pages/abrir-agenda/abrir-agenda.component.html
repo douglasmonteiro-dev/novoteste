@@ -1,0 +1,219 @@
+<app-menu>
+  <div class="row justify-content-center">
+    <div class="col-10 justify-content-start">
+      <mat-toolbar class="mt-3">
+        <span>Abrir Agenda</span>
+      </mat-toolbar>
+    
+      <mat-vertical-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="passo1">
+          <form [formGroup]="passo1">
+            <ng-template matStepLabel>Tipo de Serviço</ng-template>
+            <mat-form-field class="col-8"> 
+              <mat-select placeholder="Serviço" [(ngModel)]="passo1.value.servico" formControlName="servico" (ngModelChange)="selecionaServico()">
+                <mat-option *ngFor="let servico of servicos" [value]="servico._id">{{servico.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <a class="col-3" mat-raised-button color="accent" [routerLink]="['/servicos']">Novo</a>
+
+            <mat-form-field *ngIf="novoServico" class="col-6">
+              <input matInput disabled="true" placeholder="Tempo de Atendimento" [value]="novoServico.tempoServico">
+              <span matSuffix>&nbsp;minutos</span>
+            </mat-form-field>
+            <mat-form-field *ngIf="novoServico" class="col-6">
+              <input matInput placeholder="Valor" disabled="true" type="number" [value]="novoServico.valor">
+              <span matPrefix>R$&nbsp;</span>
+              <span matSuffix>.00</span>
+            </mat-form-field>
+            <mat-form-field *ngIf="novoServico" class="col-8">
+              <textarea matInput disabled="true" type="text" rows="3" placeholder="Descrição" [value]="novoServico.descricao"></textarea>
+            </mat-form-field>
+
+            <a class="col-2" mat-raised-button color="secondary" *ngIf="passo1.value.servico" [routerLink]="['/servico', passo1.value.servico]">Editar</a>
+
+
+        
+            <div class="row justify-content-end mt-5">
+              <button mat-button matStepperNext mat-raised-button color="primary">Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="passo2">
+          <form [formGroup]="passo2" class="container mt-3">
+            <ng-template matStepLabel>Dias e Horários</ng-template>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Selecione o período:</mat-label>
+              <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Inicio">
+                <input matEndDate formControlName="end" placeholder="Fim">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            
+              <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Data Inicial Invalida</mat-error>
+              <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Data Final Inválida</mat-error>
+            </mat-form-field>
+                <!-- <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.segunda"
+                labelPosition="before"
+                formControlName="segunda">
+                  Seg
+              </mat-checkbox>
+            
+                <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.terca"
+                labelPosition="before"
+                formControlName="terca">
+                  Ter
+              </mat-checkbox>
+            
+                <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.quarta"
+                labelPosition="before"
+                formControlName="quarta">
+                  Qua
+              </mat-checkbox>
+            
+                <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.quinta"
+                labelPosition="before"
+                formControlName="quinta">
+                  Qui
+              </mat-checkbox>
+            
+                <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.sexta"
+                labelPosition="before"
+                formControlName="sexta">
+                  Sex
+              </mat-checkbox>
+                <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.sabado"
+                labelPosition="before"
+                formControlName="sabado">
+                  Sab
+              </mat-checkbox>
+                <mat-checkbox
+                class="col-2"
+                [(ngModel)]="passo2.value.domingo"
+                labelPosition="before"
+                formControlName="domingo">
+                  Dom
+              </mat-checkbox> -->
+            
+              <div class="input-group col-12 mb-2">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Hora</span>
+                  </div>
+                  <input class="form-control" [(ngModel)]="passo2.value.horaInicio" formControlName="horaInicio" placeholder="1º Cliente" aria-label="Hora de Inicio dos Atendimentos" [ngxTimepicker]="inicio" [format]="24"  readonly>
+                  <ngx-material-timepicker #inicio></ngx-material-timepicker>
+              </div>
+              <div class="input-group col-12">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Hora</span>
+                  </div>
+                  <input class="form-control" [(ngModel)]="passo2.value.horaFim" formControlName="horaFim" placeholder="Último Cliente" aria-label="Hora de Termino dos Atendimentos" [ngxTimepicker]="fim" [format]="24"  readonly>
+                  <ngx-material-timepicker #fim></ngx-material-timepicker>
+              </div>
+
+
+            <!-- <button class="col-2" mat-raised-button color="primary">Adicionar</button> -->
+
+          
+            <div class="row justify-content-end mt-5">
+              <button mat-button matStepperPrevious mat-raised-button color="secondary" class="mr-2">Anterior</button>
+              <button mat-button matStepperNext mat-raised-button color="primary">Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="passo3" >
+          <form [formGroup]="passo3">
+            <ng-template matStepLabel>Localização</ng-template>
+            <h3>Tipo de Consulta</h3>
+            <mat-button-toggle-group [(value)]="tipoAtendimento" appearance="fill">
+              <mat-button-toggle value="remoto">Online</mat-button-toggle>
+              <mat-button-toggle value="presencial">Presencial</mat-button-toggle>
+            </mat-button-toggle-group>
+            <div class="mt-2" *ngIf="tipoAtendimento === 'presencial'">
+              <mat-form-field class="col-8">
+                <input type="search" matInput placeholder="Endereço" formControlName="localizacao" [(ngModel)]="localizacao">
+              </mat-form-field>
+              <button class="col-2" mat-raised-button color="primary" (click)="pesquisarEndereco()">Ir</button>
+  
+  
+                <!-- <agm-map *ngIf="lat > -89 && lng > -179" class="mt-2" [latitude]="lat" [zoom]="zoom" [longitude]="lng">
+                  <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map> -->
+            </div>
+            
+            <div class="row justify-content-end mt-5">
+              <button mat-button matStepperPrevious mat-raised-button color="secondary">Anterior</button>
+              <button mat-button matStepperNext mat-raised-button color="primary">Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="passo4">
+          <form [formGroup]="passo4">
+            <ng-template matStepLabel>Valor e Formas de Pagamento</ng-template>
+            
+            <mat-form-field class="row col-12 mt-3">
+              <input matInput placeholder="Valor" type="number" [(ngModel)]="valorConsulta" formControlName="valorConsulta">
+              <span matPrefix>R$&nbsp;</span>
+              <span matSuffix>.00</span>
+            </mat-form-field>
+
+
+              <mat-checkbox
+              class="row col-6 mt-2"
+              [(ngModel)]="dinheiro"
+              labelPosition="before"
+              formControlName="dinheiro">
+                Dinheiro
+              </mat-checkbox>
+
+              <mat-checkbox
+              class="row col-6"
+              [(ngModel)]="pagseguro"
+              labelPosition="before"
+              formControlName="pagseguro">
+                PagSeguro
+              </mat-checkbox>
+
+              
+          
+            <div class="row justify-content-end mt-5">
+              <button mat-button matStepperPrevious mat-raised-button color="secondary">Anterior</button>
+              <button mat-button matStepperNext mat-raised-button color="primary">Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+
+
+
+        <mat-step>
+          <ng-template matStepLabel>Pronto</ng-template>
+
+          <div class="row justify-content-end mt-5">
+            <button mat-button (click)="stepper.reset()" mat-raised-button color="secondary">Limpar Formulário</button>
+            <button mat-button (click)="abrirAgenda()" mat-raised-button color="primary">Abrir Agenda</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+  
+      
+  
+  
+  
+    </div>
+  </div>
+  
+  
+  </app-menu>

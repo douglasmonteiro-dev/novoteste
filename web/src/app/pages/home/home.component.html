@@ -1,0 +1,46 @@
+<app-menu>
+    <div class="main background">
+        <div *ngIf="user.isAutenticate()">
+                <div class="jumbotron container banner mt-5">
+          
+                    
+                    <div class="container">
+                      <p>Agora você faz parte da nossa comunidade, seja para consumir serviços ou para desenvolver projetos, fique a vontade!</p>
+                    </div>
+
+                    
+                   
+        </div>
+       
+        </div>
+        <div *ngIf="!user.isAutenticate()">
+            <div class="jumbotron container banner mt-5">
+
+
+                <h3 class="text-center mb-5">Seja Bem Vindo</h3>
+              <div class="row mb-4">
+                  <div class="col-12">
+                      <p class="text-left display-6">
+                        Nós desenvolvemos o seu projeto utilizando as mais novas e eficientes tecnologias como SPA, Inteligência Artificial, PWA, e muitas outas, venha conhecer! 
+                        Se você é desenvolvedor, pode fazer parte da nossa rede.
+                    </div>
+              </div>
+            
+
+              </div>
+
+        </div>
+
+        <app-footer>
+
+<div class="container">
+    <div class="col-sm-12 align-center">
+        <p class="display-7">
+            © Copyright 2020 COOPERDEV - All Rights Reserved
+        </p>
+    </div>
+</div>
+
+        </app-footer>
+    </div>
+</app-menu>

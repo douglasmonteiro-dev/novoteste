@@ -1,0 +1,32 @@
+
+<app-menu>  
+    
+    <div class="main background">   
+     <div class="jumbotron container banner mt-5">
+      <h1 class="text-center">Que bom que você voltou!</h1>
+    
+      <form [formGroup]="formLogin" (submit)="login()">
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00">
+          <mat-error *ngIf="formLogin.controls.cpf.invalid">
+            Por favor digite um <strong>CPF</strong> válido
+          </mat-error>
+       
+        </mat-form-field>
+        <mat-form-field class="d-inline">
+          <input matInput placeholder="Senha" formControlName="pass" type="password" mask="000000">
+
+          <mat-error *ngIf="formLogin.controls.pass.status === 'INVALID'">
+            Senha é <strong>obrigatória</strong>
+          </mat-error>
+        </mat-form-field>
+      
+      <p class="text-rigth"><a [routerLink]="['/ajuda']">Esqueci minha Senha</a><a class="float-right" [routerLink]="['/registro']">Registrar-se</a></p>
+      
+      <button mat-raised-button	class="btn btn-block" type="submit">Entrar</button>
+      
+      </form>
+     </div>
+
+    </div>
+  </app-menu>

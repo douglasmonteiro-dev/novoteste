@@ -1,0 +1,18 @@
+  <app-header title="Tatiane Nutricionista" (theme)="changeTheme()">
+    <button mat-icon-button (click)="drawer.toggle()" *ngIf="user.isAutenticate()"><i class="material-icons md-dark">person</i></button>
+  </app-header>
+  
+  <mat-drawer-container [hasBackdrop]="true">
+    <mat-drawer #drawer>
+               <mat-nav-list #nav>
+                    <a mat-list-item [routerLink]="['/']"> Home </a>
+                    <a mat-list-item [routerLink]="['/agenda']" *ngIf="user.isAutenticate()" > Consultar Agenda </a>
+                    <a mat-list-item [routerLink]="['/abrir-agenda']" *ngIf="user.isAutenticate()"> Abrir Agenda </a>
+                    <a mat-list-item [routerLink]="['/servicos']" *ngIf="user.isAutenticate()"> Serviços </a>
+                </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content class="content">
+  
+       <ng-content></ng-content>
+    </mat-drawer-content>
+  </mat-drawer-container>
